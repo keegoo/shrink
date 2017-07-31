@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  resources :urls, only:[:index, :create]
+  scope :api do 
+    resources :urls, only:[:index, :create]
+  end
+
+  get ':shorten_url', to: 'urls#parse'
 end

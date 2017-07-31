@@ -12,4 +12,14 @@ class UrlsController < ApplicationController
       render json: {error: "save url failed"}
     end
   end
+
+  def parse
+    str = params[:shorten_url]
+    u = Url.find_by_shorten(str)
+    if u
+      redirect_to u.origin
+    else
+      render json: {error: "cannot find shorten url"}
+    end
+  end
 end

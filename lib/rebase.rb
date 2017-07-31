@@ -6,7 +6,7 @@ module Rebase
   def self.encode(decimal_num)
     # special case: 0
     return CHARACTORS[0] if decimal_num == 0
-    
+
     base = CHARACTORS.length
     target = decimal_num
     res = []
@@ -20,6 +20,11 @@ module Rebase
   # convert xcimal to decimal
   def self.decode(xcimal_str)
     base = CHARACTORS.length
-    return xcimal_str.split('').map{|x| x.to_i}.reduce{|x, sum| sum = sum *x}
+    return xcimal_str
+      .chars
+      .reverse
+      .each_with_index
+      .map{|v, index| CHARACTORS.index(v) * (base ** index)}
+      .reduce{|v, sum| sum = sum + v}
   end
 end

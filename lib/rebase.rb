@@ -3,7 +3,9 @@ module Rebase
   DEFAULT = [*0..9, *'a'..'z', *'A'..'Z'].join
 
   # convert decimal to `keys.length` cimal
-  def self.encode(decimal_num, keys=DEFAULT)
+  def encode(decimal_num, keys=DEFAULT)
+    # check input
+    raise "input should be a number" unless decimal_num.is_a? Numeric
     # special case
     return keys[0] if decimal_num == 0
 
@@ -18,7 +20,9 @@ module Rebase
   end
 
   # convert xcimal to decimal
-  def self.decode(xcimal_str, keys=DEFAULT)
+  def decode(xcimal_str, keys=DEFAULT)
+    # check input
+    raise "input should be a string" unless xcimal_str.is_a? String
     base = keys.length
     return xcimal_str
       .chars
@@ -27,4 +31,6 @@ module Rebase
       .map{|v, index| keys.index(v) * (base ** index)}
       .reduce{|v, sum| sum = sum + v}
   end
+
+  extend self
 end

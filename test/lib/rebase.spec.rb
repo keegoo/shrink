@@ -35,4 +35,8 @@ class TestRebase < ActiveSupport::TestCase
     assert_equal 1, Rebase.decode('%', keys)
     assert_equal 30, Rebase.decode('*$', keys)
   end
+
+  test "should raise error msg when input is not as expected" do 
+    # assert_equal "input should be a number", Rebase.encode('0')
+  end
 end

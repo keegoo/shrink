@@ -1,5 +1,4 @@
 require 'test_helper'
-# require 'minitest/autorun'
 require_relative '../../lib/rebase.rb'
 
 class TestRebase < ActiveSupport::TestCase
@@ -23,5 +22,17 @@ class TestRebase < ActiveSupport::TestCase
     assert_equal 62 * 61 + 61, Rebase.decode('ZZ')
     assert_equal 62 * 62 * 61 + 62 * 61 + 61, Rebase.decode('ZZZ')
     assert_equal 62 * 62 * 1 + 62 * 10 + 37, Rebase.decode('1aB')
+  end
+
+  test "should change default base by assigning keys as second parameters" do 
+    keys = ['$', '%', 'b', 'd', 'e', '*']
+    
+    assert_equal '$', Rebase.encode(0, keys)
+    assert_equal '%', Rebase.encode(1, keys)
+    assert_equal '*$', Rebase.encode(5 * 6 + 0, keys)
+
+    assert_equal 0, Rebase.decode('$', keys)
+    assert_equal 1, Rebase.decode('%', keys)
+    assert_equal 30, Rebase.decode('*$', keys)
   end
 end

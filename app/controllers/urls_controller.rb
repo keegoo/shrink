@@ -5,7 +5,7 @@ class UrlsController < ApplicationController
 
   def create
     @params = params.require(:url).permit(:origin)
-    url = Url.create(@params)
+    url = Url.create_with_visit(@params)
     if url.make_it_shorten
       render json: url
     else

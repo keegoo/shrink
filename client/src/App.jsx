@@ -4,6 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import Menu from './components/Menu.jsx'
 import Editor from './components/Editor.jsx'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin()
 
 const styles = {
   editor: {

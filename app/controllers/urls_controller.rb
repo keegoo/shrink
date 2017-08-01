@@ -1,6 +1,6 @@
 class UrlsController < ApplicationController
   def index
-    render json: Url.all
+    render json: Url.select('urls.id, urls.shorten, urls.origin, visits.count').joins(:visit).all
   end
 
   def create

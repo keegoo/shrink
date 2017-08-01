@@ -2,23 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TextField from 'material-ui/TextField'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table'
+import Config from 'Config'
 
 class Editor extends React.Component {
-  state = {
-    data: [
-      { id: 1, shorten: 'el', origin: 'http://www.baidu.com', visit: 4 },
-      { id: 2, shorten: 'em', origin: 'http://www.sina.com.cn', visit: 4 },
-      { id: 3, shorten: 'en', origin: 'http://www.google.com', visit: 4 },
-      { id: 4, shorten: 'eo', origin: 'http://www.github.com', visit: 4 },
-      { id: 5, shorten: 'ep', origin: 'http://www.weibo.com', visit: 4 },
-      { id: 6, shorten: 'eq', origin: 'http://www.wechat.com', visit: 4 },
-      { id: 7, shorten: 'er', origin: 'http://www.tencent.com', visit: 4 }
-    ]
+  constructor(props) {
+    super()
+    this.state = {
+      data: []
+    }
+    this.fetchURLData = this.fetchURLData.bind(this)
+    this.fetchURLData()
+  }
+
+  fetchURLData() {
+    const host = Config.host
+    return fetch(`${host}/api/urls`)
+      .then(response => response.json())
+      .then(json => this.setState({data: json}))
   }
 
   render() {
     return(
       <div>
+        <br/>
         <TextField
           hintText="e.g.: http:// ..."
           floatingLabelText="input your URL here"
@@ -47,7 +53,7 @@ class Editor extends React.Component {
                     <TableRowColumn>{v.id}</TableRowColumn>
                     <TableRowColumn>{v.shorten}</TableRowColumn>
                     <TableRowColumn>{v.origin}</TableRowColumn>
-                    <TableRowColumn>{v.visit}</TableRowColumn>
+                    <TableRowColumn>{v.count}</TableRowColumn>
                   </TableRow>
                 )
               })

@@ -32,7 +32,9 @@ class Editor extends React.Component {
       body: JSON.stringify(bodyStr)
     })
     // clear url
-    .then(this.setState({url: ''}))
+    .then(() => this.setState({url: ''}))
+    // reload data
+    .then(() => this.fetchURLData())
   }
 
   handleEnterKeyPress = (event) => {
@@ -51,6 +53,7 @@ class Editor extends React.Component {
       <div>
         <br/>
         <TextField
+          value={this.state.url}
           hintText="e.g.: http:// ..."
           floatingLabelText="input your URL here"
           onKeyPress={this.handleEnterKeyPress}

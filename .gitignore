@@ -19,3 +19,12 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# ignore DS_store
+**/.DS_Store
+
+# ignore public/bundle.js
+public/bundle.js
+
+# ignore node_module folder
+**/node_modules

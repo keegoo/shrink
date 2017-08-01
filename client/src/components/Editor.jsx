@@ -8,17 +8,42 @@ class Editor extends React.Component {
   constructor(props) {
     super()
     this.state = {
-      data: []
+      data: [],
+      url: ''
     }
-    this.fetchURLData = this.fetchURLData.bind(this)
     this.fetchURLData()
   }
 
-  fetchURLData() {
+  fetchURLData = () => {
     const host = Config.host
     return fetch(`${host}/api/urls`)
       .then(response => response.json())
       .then(json => this.setState({data: json}))
+  }
+
+  saveURL = (urlStr) => {
+    const host = Config.host
+    const bodyStr = {
+      origin: urlStr
+    }
+    return fetch(`${host}/api/urls`, {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json'}),
+      body: JSON.stringify(bodyStr)
+    })
+    // clear url
+    .then(this.setState({url: ''}))
+  }
+
+  handleEnterKeyPress = (event) => {
+    if (event.charCode === 13) {
+      event.preventDefault()
+      this.saveURL(this.state.url)
+    }
+  }
+
+  handleTextOnchange = (event) => {
+    this.setState({url: event.target.value})
   }
 
   render() {
@@ -28,6 +53,8 @@ class Editor extends React.Component {
         <TextField
           hintText="e.g.: http:// ..."
           floatingLabelText="input your URL here"
+          onKeyPress={this.handleEnterKeyPress}
+          onChange={this.handleTextOnchange}
         />
         <br/>
         <br/>

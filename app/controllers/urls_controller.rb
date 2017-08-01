@@ -17,6 +17,7 @@ class UrlsController < ApplicationController
     str = params[:shorten_url]
     u = Url.find_by_shorten(str)
     if u
+      u.visit.increment
       redirect_to u.origin
     else
       render json: {error: "cannot find shorten url"}

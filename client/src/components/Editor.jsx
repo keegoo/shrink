@@ -32,6 +32,12 @@ class Editor extends React.Component {
                 <h2 style={{textAlign: 'center'}}>Dashboard</h2>
               </TableHeaderColumn>
             </TableRow>
+            <TableRow>
+              <TableHeaderColumn>ID</TableHeaderColumn>
+              <TableHeaderColumn>Shorten URL</TableHeaderColumn>
+              <TableHeaderColumn>Origin URL</TableHeaderColumn>
+              <TableHeaderColumn>Visits</TableHeaderColumn>
+            </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {

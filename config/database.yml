@@ -20,6 +20,10 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# use postgre in production
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: shrink_production
+  username: shrink
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>

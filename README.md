@@ -2,11 +2,13 @@
 
 ## Introduction
 
-This is a URL shorter.
+`Shrink` is a URL shorter.
 
-Front-end: ReactJS + Material-UI
+Front-end: ReactJS + Material-UI.
 
-Back-end: Rails + SQLite
+Back-end: Rails + SQLite.
+
+I've created a sample in heroku. Please check: https://shrink-sample.herokuapp.com/.
 
 ## Installation
 
@@ -27,7 +29,7 @@ Here's how I check mine:
 
 #### get source
 
-`git clone https://github.com/keegoo/shrink`
+`git clone https://github.com/keegoo/shrink`.
 
 #### resolve dependencies
 
@@ -69,5 +71,3 @@ Visit `127.0.0.1:3000/<shorten-URL>`, then you'll be redirected to the original 
 Your original URL should be a full one, which means it should begin with `http:// ...`.
 
 The method used to shorten URL is: 1). store original URL into DB; 2) get the ID in the DB table; 3) Convert ID into 62 based. So the IDs from 1 to 62 will simply transfer to single digit number([0..9, a..z, A..Z]).
-
-

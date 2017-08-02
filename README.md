@@ -43,6 +43,9 @@ shell$ bundle install
 # build UI
 shell$ cd shrink/client
 shell$ ./node_modules/.bin/webpack -p
+
+# migrarte DB
+shell$ rails db:migrate
 ```
 
 #### start server
@@ -64,5 +67,7 @@ Type in the `TextField` and click `enter` to have a new shorten URL generated.
 Visit `127.0.0.1:3000/<shorten-URL>`, then you'll be redirected to the original URL. The `Visits` in the Dashboard for that URL will increase 1.
 
 Your original URL should be a full one, which means it should begin with `http:// ...`.
+
+The method used to shorten URL is: 1). store original URL into DB; 2) get the ID in the DB table; 3) Convert ID into 62 based. So the IDs from 1 to 62 will simply transfer to single digit number([0..9, a..z, A..Z]).
 
 

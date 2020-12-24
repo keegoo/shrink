@@ -4,9 +4,9 @@
 
 `Shrink` is a URL shorter.
 
-Front-end: ReactJS + Material-UI.
+Frontend: ReactJS + Material-UI.
 
-Back-end: Rails + SQLite.
+Backend: Rails + Postgresql.
 
 I've created a sample in heroku. Please check: https://shrink-sample.herokuapp.com/.
 
@@ -16,14 +16,13 @@ I've created a sample in heroku. Please check: https://shrink-sample.herokuapp.c
 
 You need to make sure `Ruby` and `NodeJS` was installed.
 
-Here's how I check mine:
+```shell
+~$ node -v
+v8.2.1
 
-    shell$ npm -v
-    4.0.5
-
-    shell$ ruby -v
-    ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-darwin16]
-
+~$ ruby -v
+ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-darwin16]
+```
 
 ## Setup
 
@@ -35,39 +34,40 @@ Here's how I check mine:
 
 ```shell
 # UI dependencies
-shell$ cd shrink/client
-shell$ npm install
+~$ cd shrink/client
+~$ npm install
 
 # Backend dependencies
-shell$ cd shrink/
-shell$ bundle install
+~$ cd shrink/
+~$ bundle install
 
-# build UI
-shell$ cd shrink/client
-shell$ ./node_modules/.bin/webpack -p
+# Build UI
+~$ cd shrink/client
+~$ ./node_modules/.bin/webpack -p
 
-# migrarte DB
-shell$ rails db:migrate
+# Migrarte DB
+~$ rails db:migrate
 ```
 
 #### start server
 
 ```shell
-shell$ cd shrink
-shell$ rails s
+~$ cd shrink
+~$ rails s
 ```
 
 #### done
 
 Open `127.0.0.1:3000` to take a look!
 
-
 ## notes
 
-Type in the `TextField` and click `enter` to have a new shorten URL generated.
+Input the URL say http://www.facebook.com in the `TextField`. Then type `enter` in the keyboard. A new shorten URL will be generated.
 
 Visit `127.0.0.1:3000/<shorten-URL>`, then you'll be redirected to the original URL. The `Visits` in the Dashboard for that URL will increase 1.
 
-Your original URL should be a full one, which means it should begin with `http:// ...`.
+The method used to shorten URL is: 
 
-The method used to shorten URL is: 1). store original URL into DB; 2) get the ID in the DB table; 3) Convert ID into 62 based. So the IDs from 1 to 62 will simply transfer to single digit number([0..9, a..z, A..Z]).
+1. store original URL into DB.
+2. get the ID in the DB table.
+3. convert ID into 62 based. So the IDs from 1 to 62 will simply transfer to single digit number([0..9, a..z, A..Z]).
